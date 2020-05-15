@@ -48,3 +48,11 @@ Literals can be used to limit a parameter to certain values.
 Type alises can be used to make references to types easier.
 
 A function's return type gets inferred by TypeScript. TS has the void return type available.
+
+<h2>TypeScript Compiler</h2>
+
+`tsc <filename>.ts --watch` or -w can be used to enter watch mode for a file.
+
+Running `tsc --init` tells TS that the project and all of its subfolders should be managed by TS.
+It creates a `tsconfig.json` file. After it is created `tsc -w` can be run so that it'd watch
+the entire project.
