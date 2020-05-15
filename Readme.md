@@ -56,3 +56,8 @@ A function's return type gets inferred by TypeScript. TS has the void return typ
 Running `tsc --init` tells TS that the project and all of its subfolders should be managed by TS.
 It creates a `tsconfig.json` file. After it is created `tsc -w` can be run so that it'd watch
 the entire project.
+
+TypeScript is aware of the value present and type checks around values. 
+So instead of using `!` at the end of a potentially null value, you could 
+also just use `if (val) blabla`. The exclamation mark is shorter, though, so if
+you know that the value is present, then use that.

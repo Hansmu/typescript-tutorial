@@ -26,7 +26,7 @@
     // "noEmitOnError": true /* Can be used to make sure TS doesn't output JS files if there is an error. */
 
     /* Strict Type-Checking Options */
-    "strict": true,                           /* Enable all strict type-checking options. */
+    "strict": true,                           /* Enable all strict type-checking options. That is all of the below option are automatically set to true when this is true. */
     // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
     // "strictNullChecks": true,              /* Enable strict null checks. */
     // "strictFunctionTypes": true,           /* Enable strict checking of function types. */
