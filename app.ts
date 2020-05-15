@@ -37,9 +37,9 @@ if (person.loves === Loves.BISCUITS) {
     console.log("Biscuits, yay!");
 }
 
-function print(val: number | string) {
+function print(val: number | string, addString: 'someThing' | 'anotherThing') {
     console.log(val);
 }
 
-print(2);
-print('2');
+print(2, 'someThing');
+print('2', 'anotherThing');

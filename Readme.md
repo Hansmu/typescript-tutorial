@@ -39,3 +39,5 @@ TS specific types:
 * any (:any) - can just be whatever, kind of removes TypeScript's point
 
 Union can be used to allow different types. (: number | string)
+
+Literals can be used to limit a parameter to certain values.
