@@ -41,3 +41,5 @@ TS specific types:
 Union can be used to allow different types. (: number | string)
 
 Literals can be used to limit a parameter to certain values.
+
+Type alises can be used to make references to types easier.

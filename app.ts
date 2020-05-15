@@ -1,3 +1,5 @@
+type Combinable = number | string;
+
 function add(n1: number, n2: number, isShowingResult: true, resultPhrase: string) {
     const sum = n1 + n2;
     isShowingResult && console.log(`${resultPhrase} ${sum}`);
@@ -37,7 +39,7 @@ if (person.loves === Loves.BISCUITS) {
     console.log("Biscuits, yay!");
 }
 
-function print(val: number | string, addString: 'someThing' | 'anotherThing') {
+function print(val: Combinable, addString: 'someThing' | 'anotherThing') {
     console.log(val);
 }
 
