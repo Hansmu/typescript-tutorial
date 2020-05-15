@@ -37,6 +37,9 @@ TS specific types:
 * Tuple (:[number, string]) - defines that it should have a list with 2 elements only, first being a number, second being a string.
 * Enum (enum {NEW, OLD})
 * any (:any) - can just be whatever, kind of removes TypeScript's point
+* unknown - can be used to say that you don't know what variable will be there, but that when it's used it should be checked. any is similar, but that would just cause TS to ignore whatever typing is happening.
+* never - never says that your function will never return. That is, it will throw an error and the end of the function will never be reached. Such a method defaults to void with TS, as never is a newer feature,
+but never could be a good thing to use to clearly define what your function is expected to do.
 
 Union can be used to allow different types. (: number | string)
 
