@@ -66,4 +66,10 @@
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   }
+  /*
+  "exclude": ["somefile.ts", "*.dev.ts", "node_modules"] can be used to exclude a file from compilation. node_modules is excluded as a default setting, so you don't really have to add exclude just for that.
+  However, when using exclude for some other files, then node_modules has to be added manually.
+  "include": ["app.ts"] if choosing to use the include section, then have to specify every ts file that you want to include.
+  "files": ["app.ts"] same as include, but you don't have the option of including entire folders.
+  */
 }
