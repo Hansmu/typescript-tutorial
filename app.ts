@@ -45,3 +45,16 @@ function print(val: Combinable, addString: 'someThing' | 'anotherThing'): void {
 
 print(2, 'someThing');
 print('2', 'anotherThing');
+
+// Defining a void return type doesn't mean that the function passed in has to be a void return type. It's telling the caller that the value won't be used.
+function someFunc(cb: (n: string) => void) {
+    cb('bananas');
+}
+
+let functionReference: Function; // Can set any function equal to this
+let functionTypeReference: (a: number, b: number) => number; // Function needs to match the defined signature
+
+someFunc(val => {
+    console.log(val);
+    return val;
+})
