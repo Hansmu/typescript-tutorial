@@ -39,7 +39,7 @@ if (person.loves === Loves.BISCUITS) {
     console.log("Biscuits, yay!");
 }
 
-function print(val: Combinable, addString: 'someThing' | 'anotherThing') {
+function print(val: Combinable, addString: 'someThing' | 'anotherThing'): void {
     console.log(val);
 }
 
