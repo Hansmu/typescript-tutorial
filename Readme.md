@@ -36,3 +36,6 @@ TS specific types:
 * Array (:string[], :number[], :any[])
 * Tuple (:[number, string]) - defines that it should have a list with 2 elements only, first being a number, second being a string.
 * Enum (enum {NEW, OLD})
+* any (:any) - can just be whatever, kind of removes TypeScript's point
+
+Union can be used to allow different types. (: number | string)

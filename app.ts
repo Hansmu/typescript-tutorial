@@ -36,3 +36,10 @@ activities = ['Potato picking', 'Running from the cops'];
 if (person.loves === Loves.BISCUITS) {
     console.log("Biscuits, yay!");
 }
+
+function print(val: number | string) {
+    console.log(val);
+}
+
+print(2);
+print('2');
