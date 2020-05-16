@@ -111,3 +111,37 @@ class ITDepartment extends Department {
 }
 
 Department.declareYourself();
+
+interface Person { //Interfaces can extend each other. An interface can extend from multiple interfaces.
+    name: string; // Interfaces can have variables.
+    age: number;
+
+    greet(): void;
+}
+
+class Bob implements Person {
+    constructor(public name: string = 'Bob', public age: number = 28) {
+    }
+
+    greet() {
+        console.log('Still saying hello')
+    }
+}
+
+let per: Person;
+
+per = {
+    name: 'Bob',
+    age: 20,
+    greet() {
+        console.log('Hello')
+    }
+};
+
+per = new Bob();
+
+// An interface can be declared as a function type. It'd be easier to declare a custom type, though.
+interface AddFn {
+    (a: number, b: number): number;
+}
+type AnotherAddFn = (a: number, b: number) => number;
