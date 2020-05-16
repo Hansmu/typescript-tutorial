@@ -1,4 +1,5 @@
 type Combinable = number | string;
+type Numeric = number | boolean;
 
 function add(n1: number, n2: number, isShowingResult: true, resultPhrase: string) {
     const sum = n1 + n2;
@@ -144,3 +145,23 @@ interface AddFn {
     (a: number, b: number): number;
 }
 type AnotherAddFn = (a: number, b: number) => number;
+
+type Admin = {
+    name: string;
+    privileges: string[];
+};
+
+type Employee = {
+    name: string;
+    startDate: Date;
+};
+
+type ElevatedEmployee = Admin & Employee; // Can be used to combine types into one type. Has to have the values of both. The result is union.
+
+const e1: ElevatedEmployee = {
+    name: 'Bob',
+    privileges: ['tickle'],
+    startDate: new Date()
+};
+
+type Universal = Combinable & Numeric; // This, however, results in intersection.
