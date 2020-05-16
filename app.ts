@@ -27,7 +27,7 @@ const person: {
 } = {
     name: 'Potato Bandit',
     age: 68,
-    nickname: null,
+    nickname: '',
     role: [1, '10'],
     loves: Loves.BISCUITS
 }
@@ -58,3 +58,27 @@ someFunc(val => {
     console.log(val);
     return val;
 })
+
+class Department {
+    private _name: string; // public is the default.
+
+    // Readonly can be used to allow it to be set in only on initialization. Final would be the equivalent
+    constructor(name: string, private readonly someDude: string, private id: number) { // Can define parameters with just private id: number instead of the constructor. Shorthand for the usual creating of a field and setting this.bla = bla;
+        this._name = name;
+    }
+
+    describe(this: Department) { // this can be added to avoid losing the proper this reference. For example, if the function reference is passed to some custom object.
+        console.log('The department is: ' + this.name);
+    }
+
+    get name(): string {
+        return this._name;
+    }
+
+    set name(value: string) {
+        this._name = value;
+    }
+}
+
+const dep = new Department('Biscuit controller', 'Bob', 202);
+dep.describe();
