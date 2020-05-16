@@ -59,16 +59,33 @@ someFunc(val => {
     return val;
 })
 
-class Department {
+abstract class Unit {
+    abstract unit(): void;
+}
+
+class Department extends Unit {
     private _name: string; // public is the default.
 
     // Readonly can be used to allow it to be set in only on initialization. Final would be the equivalent
     constructor(name: string, private readonly someDude: string, private id: number) { // Can define parameters with just private id: number instead of the constructor. Shorthand for the usual creating of a field and setting this.bla = bla;
+        super();
         this._name = name;
     }
 
     describe(this: Department) { // this can be added to avoid losing the proper this reference. For example, if the function reference is passed to some custom object.
-        console.log('The department is: ' + this.name);
+        console.log('The department is: ' + this.name); // Accessing the field via a getter is not done by calling a method, but just calling the property that matches the getter.
+    }
+
+    protected askParent() {
+        console.log('Am parent');
+    }
+
+    static declareYourself() {
+        console.log('IT IS I, DEPARTMENT.');
+    }
+
+    unit() {
+        console.log('Potato');
     }
 
     get name(): string {
@@ -82,3 +99,15 @@ class Department {
 
 const dep = new Department('Biscuit controller', 'Bob', 202);
 dep.describe();
+
+class ITDepartment extends Department {
+    constructor(id: number) {
+        super('IT Department', 'Robbert', id);
+    }
+
+    describe() { // Can just overwrite by declaring the same signature
+        super.askParent();
+    }
+}
+
+Department.declareYourself();
