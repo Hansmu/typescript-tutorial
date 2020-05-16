@@ -203,3 +203,6 @@ function addTestValues(a: Combinable, b: Combinable) {
 
     return a + b;
 }
+
+const res = fetch('www.potato.öö').then(json => json.json());
+const existentValue = res ?? 'Kartul'; // Nullish coalescing. If the value is null or undefined, then it gets set to this string.
