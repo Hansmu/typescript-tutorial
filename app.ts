@@ -189,3 +189,17 @@ interface StringConstrainedObject {
     // id: number; // This cannot be done, as that would violate the definition down below, as the property id would have a number value
     [field: string]: string // It defines that an object can only have property keys that are strings and property values that are strings.
 }
+
+// The problem here is that when you call the method, then the caller won't know what the exact return type will be, only that it'll be Combinable.
+// So you'll have to start casting when you're calling it. This can be fixed with "function overloading". Not really a function overload, more like declaring
+// potential interfaces or something.
+//function addTestValues(a: number): number // Can be used if the other value is optional
+function addTestValues(a: number, b: number): number;
+function addTestValues(a: string, b:string): string;
+function addTestValues(a: Combinable, b: Combinable) {
+    if (typeof a === 'string' || typeof b === 'string') {
+        return a.toString() + b.toString();
+    }
+
+    return a + b;
+}
