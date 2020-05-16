@@ -147,11 +147,13 @@ interface AddFn {
 type AnotherAddFn = (a: number, b: number) => number;
 
 type Admin = {
+    // type: 'banana'; A hardcoded property can be used in a switch statement to determine if something is of a certain type?? Seems pointless. Why not just use different classes?? Anyway, called discriminated unions.
     name: string;
     privileges: string[];
 };
 
 type Employee = {
+    // type: 'biscuit';
     name: string;
     startDate: Date;
 };
@@ -183,3 +185,7 @@ function addValues(a: Combinable, b: Combinable, el: Person) {
     return a + b;
 }
 
+interface StringConstrainedObject {
+    // id: number; // This cannot be done, as that would violate the definition down below, as the property id would have a number value
+    [field: string]: string // It defines that an object can only have property keys that are strings and property values that are strings.
+}
