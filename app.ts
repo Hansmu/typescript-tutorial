@@ -165,3 +165,21 @@ const e1: ElevatedEmployee = {
 };
 
 type Universal = Combinable & Numeric; // This, however, results in intersection.
+
+function addValues(a: Combinable, b: Combinable, el: Person) {
+    if (typeof a === 'string' || typeof b === 'string') { // Adding this is called a type guard. This is a regular JS call.
+        return a.toString() + b.toString();
+    }
+
+    // In the case of an object and a certain type would have to be determined for type guards, then in can be used.
+    // if ('startDate' in el) {
+    //     return a;
+    // }
+    // However, a better case would be to use instanceof, which is also a vanilla JS operator.
+    // if (el instanceof Bob) {
+    //
+    // }
+
+    return a + b;
+}
+
