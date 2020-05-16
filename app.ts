@@ -21,13 +21,12 @@ enum Loves {
 const person: {
     name: string;
     age: number;
-    nickname: string;
+    nickname?: string;
     role: [number, string]; // Push, however, can still be called on it.
     loves: Loves;
 } = {
     name: 'Potato Bandit',
     age: 68,
-    nickname: '',
     role: [1, '10'],
     loves: Loves.BISCUITS
 }
@@ -114,7 +113,7 @@ Department.declareYourself();
 
 interface Person { //Interfaces can extend each other. An interface can extend from multiple interfaces.
     name: string; // Interfaces can have variables.
-    age: number;
+    age?: number; // ? can be used to declare an optional value
 
     greet(): void;
 }
