@@ -274,6 +274,16 @@ function FieldLogger(target: any, propertyName: string | Symbol) {
     console.log('Property decorator!', target, propertyName);
 }
 
+// Target is the prototype, name is the method name, the descriptor is different depending if it's added to a setter/getter or a regular method. A setter/getter displays setter and getter in the descriptor. This is from JS, not TS.
+function MethodLogger(target: any, name: string, descriptor: PropertyDescriptor) {
+    console.log('Method logging here for parameters: ', {target, name, descriptor});
+}
+
+// The name is not the name of the parameter, but the name of the method. Position is which parameter it is in the method, its index among the parameters.
+function ParameterLogger(target: any, name: string | Symbol, position: number) {
+    console.log('Triggering parameter decorator.', {target, name, position});
+}
+
 console.log('------------------------------- CREATING DECORATED OBJECT EXAMPLE HERE -------------------------------')
 
 // The decorators run bottom up. So LoggerCustom runs first.
@@ -288,6 +298,11 @@ class Entity {
     constructor(title: string) {
         this.title = title;
         console.log('Creating person object...')
+    }
+
+    @MethodLogger
+    sayHello(@ParameterLogger additionalText: string) {
+        console.log('Saying hello');
     }
 }
 
