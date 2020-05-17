@@ -280,6 +280,7 @@ function LoggerCustom(logString: string) {
 // target prints the prototype of our object. propertyName prints the name of our property.
 // the field decorator is executed when your class definition is registered by Javascript.
 // the field names do not matter.
+// Returning something here doesn't matter. TS will ignore it.
 function FieldLogger(target: any, propertyName: string | Symbol) {
     console.log('Property decorator!', target, propertyName);
 }
@@ -287,6 +288,7 @@ function FieldLogger(target: any, propertyName: string | Symbol) {
 // Target is the prototype, name is the method name, the descriptor is different depending if it's added to a setter/getter or a regular method. A setter/getter displays setter and getter in the descriptor. This is from JS, not TS.
 function MethodLogger(target: any, name: string, descriptor: PropertyDescriptor) {
     console.log('Method logging here for parameters: ', {target, name, descriptor});
+
 }
 
 // The name is not the name of the parameter, but the name of the method. Position is which parameter it is in the method, its index among the parameters.
@@ -317,3 +319,35 @@ class Entity {
 }
 
 const pers = new Entity('Mr');
+
+function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+    const adjDescriptor: PropertyDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() { // Adding a getter gives us the ability to perform some extra logic before the method is called.
+            // A getter is essentially just a value property but with extra logic being run before.
+            const boundFunction = originalMethod.bind(this); // Since it's inside of a getter method, then `this` will always refer to the one that's calling the getter,
+            // which has to be the original class. A getter adds an extra layer between the method and the caller. The caller of the getter method will always be the specific
+            // method to which it belongs, while the caller of the original method can be whoever. this will never be overwritten in this context.
+            return boundFunction;
+        }
+    };
+
+    return adjDescriptor;
+}
+
+class Printer {
+    private _message = 'This works!';
+
+    @Autobind
+    showMessage() {
+        console.log(this._message);
+    }
+}
+
+const p = new Printer();
+
+const printerButton = document.querySelector('#clicky');
+printerButton?.addEventListener('click', p.showMessage); // When doing this, we lose the this reference, as we're passing the method reference without its proper context.
+// A fix would be to use p.showMessage.bind(p);
