@@ -239,3 +239,18 @@ class PrimitiveDataStorage<T extends number | string | boolean> {
 
 const textStorage = new PrimitiveDataStorage<string>();
 textStorage.addItem('Kartul');
+
+interface CourseGoal {
+    title: string;
+    description: string;
+}
+
+function createCourseGoal(title: string, description: string): CourseGoal {
+    let courseGoal: Partial<CourseGoal> = {}; // A partial can be used to define your object with temporarily optional fields.
+    courseGoal.title = title;
+    courseGoal.description = description;
+    return courseGoal as CourseGoal;
+}
+
+const moreNames: Readonly<string[]> = ['MAX', 'ANNA'];
+// moreNames.push('Kartul'); Readonly can be used to say that the variable can no longer be changed. Can also be applied to objects.
