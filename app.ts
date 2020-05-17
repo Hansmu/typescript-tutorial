@@ -220,3 +220,22 @@ const newObj = merge({name: 'Max'}, {age: 182}); // The generic call can infer t
 function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) { // keyof constraint can be used to make sure that the object has a certain key.
     return 'Value is: ' + obj[key];
 }
+
+class DataStorage<T> {
+    private data: T[] = [];
+
+    addItem(item: T) {
+        this.data.push(item);
+    }
+}
+
+class PrimitiveDataStorage<T extends number | string | boolean> {
+    private data: T[] = [];
+
+    addItem(item: T) {
+        this.data.push(item);
+    }
+}
+
+const textStorage = new PrimitiveDataStorage<string>();
+textStorage.addItem('Kartul');
