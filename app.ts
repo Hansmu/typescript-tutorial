@@ -254,3 +254,28 @@ function createCourseGoal(title: string, description: string): CourseGoal {
 
 const moreNames: Readonly<string[]> = ['MAX', 'ANNA'];
 // moreNames.push('Kartul'); Readonly can be used to say that the variable can no longer be changed. Can also be applied to objects.
+
+function Logger(constructor: Function) { // The name doesn't matter. It gets run when the object is constructed, but the constructor is just a local variable name.
+    // Can mark it as _:Function when you don't care about the incoming parameter.
+    console.log('Object has been constructed');
+}
+
+function LoggerCustom(logString: string) {
+    return function(constructor: Function) {
+        console.log(logString);
+        console.log('Object has been constructed');
+    }
+}
+
+// The decorators run bottom up. So LoggerCustom runs first.
+@Logger
+@LoggerCustom('LOG THIS!')
+class Entity {
+    name = 'Bob';
+
+    constructor() {
+        console.log('Creating person object...')
+    }
+}
+
+const pers = new Entity();
