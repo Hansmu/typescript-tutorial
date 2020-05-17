@@ -206,3 +206,12 @@ function addTestValues(a: Combinable, b: Combinable) {
 
 const res = fetch('www.potato.öö').then(json => json.json());
 const existentValue = res ?? 'Kartul'; // Nullish coalescing. If the value is null or undefined, then it gets set to this string.
+
+const names: Array<string> = [];
+
+function merge<T, U>(objA: T, objB: U) {
+    return {...objA, ...objB};
+}
+
+const newObj = merge({name: 'Max'}, {age: 182}); // The generic call can infer the types from the parameters that are passed in
+// Can be super explicit and say merge<{name: string}, {age: number}>(.., ...); But there isn't any point really.
