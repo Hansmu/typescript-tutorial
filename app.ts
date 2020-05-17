@@ -262,8 +262,18 @@ function Logger(constructor: Function) { // The name doesn't matter. It gets run
 }
 
 function LoggerCustom(logString: string) {
-    return function(constructor: Function) { // What the decorator receives depends on where you're adding the decorator. When adding it to a class, then it receives a constructor.
+    // the new keyword can be used to say that the object that we're extending can be newed. ...args: any[] to declare a signature that accepts whatever amount of parameters.
+    return function<T extends {new(...args: any[]): {name: string}}>(originalConstructor: T) { // What the decorator receives depends on where you're adding the decorator. When adding it to a class, then it receives a constructor.
         console.log(logString + ': the object has been constructed using the custom logger');
+        // A decorator can return a new declaration of the class. Or overwrite the constructor method
+        // Now the actions gets triggered when the actual object is constructed, instead of being called on the class definition declaration.
+        return class extends originalConstructor { // Don't have to extend, but then what's the point? Going to lose everything of the original class otherwise.
+            // _ is a reserved keyword in TS, means that you know that there is a variable, but you don't plan on using it.
+            constructor(..._: any[]) { // Add the same ...args.any[] here, as it's the same as the above class.
+                super();
+                console.log('The name I have is: ' + this.name);
+            }
+        }
     }
 }
 
