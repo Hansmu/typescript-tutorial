@@ -204,8 +204,8 @@ function addTestValues(a: Combinable, b: Combinable) {
     return a + b;
 }
 
-const res = fetch('www.potato.öö').then(json => json.json());
-const existentValue = res ?? 'Kartul'; // Nullish coalescing. If the value is null or undefined, then it gets set to this string.
+// const res = fetch('www.potato.öö').then(json => json.json());
+// const existentValue = res ?? 'Kartul'; // Nullish coalescing. If the value is null or undefined, then it gets set to this string.
 
 const names: Array<string> = [];
 
@@ -255,27 +255,40 @@ function createCourseGoal(title: string, description: string): CourseGoal {
 const moreNames: Readonly<string[]> = ['MAX', 'ANNA'];
 // moreNames.push('Kartul'); Readonly can be used to say that the variable can no longer be changed. Can also be applied to objects.
 
-function Logger(constructor: Function) { // The name doesn't matter. It gets run when the object is constructed, but the constructor is just a local variable name.
+// The decorator gets run once the JS engine detects the declaration. Doesn't actually get run when a new object is created, but rather when the class definition is encountered.
+function Logger(constructor: Function) { // The name doesn't matter. It gets run when the object is detected, but the constructor is just a local variable name.
     // Can mark it as _:Function when you don't care about the incoming parameter.
-    console.log('Object has been constructed');
+    console.log('Object has been constructed via the logger');
 }
 
 function LoggerCustom(logString: string) {
-    return function(constructor: Function) {
-        console.log(logString);
-        console.log('Object has been constructed');
+    return function(constructor: Function) { // What the decorator receives depends on where you're adding the decorator. When adding it to a class, then it receives a constructor.
+        console.log(logString + ': the object has been constructed using the custom logger');
     }
 }
+
+// target prints the prototype of our object. propertyName prints the name of our property.
+// the field decorator is executed when your class definition is registered by Javascript.
+// the field names do not matter.
+function FieldLogger(target: any, propertyName: string | Symbol) {
+    console.log('Property decorator!', target, propertyName);
+}
+
+console.log('------------------------------- CREATING DECORATED OBJECT EXAMPLE HERE -------------------------------')
 
 // The decorators run bottom up. So LoggerCustom runs first.
 @Logger
 @LoggerCustom('LOG THIS!')
 class Entity {
+    @FieldLogger
     name = 'Bob';
+    @FieldLogger
+    title: string;
 
-    constructor() {
+    constructor(title: string) {
+        this.title = title;
         console.log('Creating person object...')
     }
 }
 
-const pers = new Entity();
+const pers = new Entity('Mr');
