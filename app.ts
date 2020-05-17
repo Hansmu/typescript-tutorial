@@ -281,6 +281,8 @@ function LoggerCustom(logString: string) {
 // the field decorator is executed when your class definition is registered by Javascript.
 // the field names do not matter.
 // Returning something here doesn't matter. TS will ignore it.
+// Field decorators could be used for validation. You register the ones with a validation decorator, set the conditions, save them into some global variable,
+// then trigger validations based on the saved object.
 function FieldLogger(target: any, propertyName: string | Symbol) {
     console.log('Property decorator!', target, propertyName);
 }
