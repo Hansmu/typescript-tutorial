@@ -209,10 +209,14 @@ const existentValue = res ?? 'Kartul'; // Nullish coalescing. If the value is nu
 
 const names: Array<string> = [];
 
-// Specific constraints can be set for the generic types by using extends.
+// Specific constraints can be set for the generic types by using extends. Can use the generics to define the return type as well.
 function merge<T extends object, U extends object>(objA: T, objB: U) {
     return {...objA, ...objB};
 }
 
 const newObj = merge({name: 'Max'}, {age: 182}); // The generic call can infer the types from the parameters that are passed in
 // Can be super explicit and say merge<{name: string}, {age: number}>(.., ...); But there isn't any point really.
+
+function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) { // keyof constraint can be used to make sure that the object has a certain key.
+    return 'Value is: ' + obj[key];
+}
