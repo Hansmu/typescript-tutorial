@@ -209,7 +209,8 @@ const existentValue = res ?? 'Kartul'; // Nullish coalescing. If the value is nu
 
 const names: Array<string> = [];
 
-function merge<T, U>(objA: T, objB: U) {
+// Specific constraints can be set for the generic types by using extends.
+function merge<T extends object, U extends object>(objA: T, objB: U) {
     return {...objA, ...objB};
 }
 
